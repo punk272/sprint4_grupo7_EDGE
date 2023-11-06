@@ -58,7 +58,7 @@ Peças usadas na construção deste circuito:
 * 1 x Sensor de Força HX711
 * 3 x Resistores de 10k Ohms
 * 1 x Resistor de 4.7k Ohms
-* 8 x Jumpercables
+* Jumpercables
 
 ## Requisitos
 
