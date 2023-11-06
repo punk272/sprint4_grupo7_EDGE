@@ -30,7 +30,7 @@
 
 // Force Sensor
 #define DOUT 34
-#define SCK 26
+#define SCK 36
 
 // Defina os pinos para os LEDs
 #define LED_VERMELHO 25
