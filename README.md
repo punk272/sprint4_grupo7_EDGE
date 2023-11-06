@@ -1,7 +1,7 @@
 <h1 align="center"> Sprint 4 - Sensor de Força + LCD + LED no ESP32 | Challenge IBM </h1> <br>
 <p align="center">
-  <a href="https://github.com/punk272/checkpoint5_edge">
-    <img alt="Circuito" title="Wokwi" src="https://imgur.com/rHbCDoS.png" width="1000">
+  <a href="https://github.com/punk272/sprint4_grupo7_EDGE">
+    <img alt="Circuito" title="ESP32HX711" src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2022/03/ESP32-load-cell-HX711-amplifier.jpg?resize=1024%2C576&quality=100&strip=all&ssl=1" width="1000">
   </a>
 </p>
 
@@ -46,12 +46,8 @@ Desenvolvimento da Inteligência Artificial: A IoT gera grandes volumes de dados
 
 ## Projeto
 
-Para o funcionamento do nosso projeto de criação e cheacagem de saúde de um de um servidor usamos uma máquina virtual atráves da plataforma VMware e então usamos o Ubunto para baixar o sistema operaciaonal Linux, após isso fizemos a instalação da imagem na máquina virual e configuramos a rede de VM como bridge. Após a instalação da imagem na máquina virtual baixamos o postman e suas collection necessárias para fazer a intalação do Docker e por fim entramos na máquina virtual e através do terminal fizemos usamos alguns comandos para instalar o docker gerando uma plataforma backend para o nosso servidor para obter dados importantes da máquina virtual coomo IP, e por fim usamos esses dados para executar a ação de health check e concluir nosso trabalho.
-
-
-
-
-
+Nosso projeto consiste em um circuito ESP32 com um Sensor de Força implementados em uma lixeira para calcular o seu peso e indicar se a lixeira está vazia/com pouco peso, com peso médio ou muito pesada utilizando um display LCD e três LEDs.
+Além disso, capturar os dados de peso e, utilizando MQTT, armazenar esses valores em uma plataforma back-end para facilitar a manutenção das lixeiras, tudo isso em tempo real.
 
 ## Componentes
 
@@ -59,20 +55,21 @@ Peças usadas na construção deste circuito:
 
 * 1 x Placa ESP32
 * 1 x Breadboard
-* 1 x Sensor DHT11 ou DHT22
-* 1 x Resistor Dependente da Luz (LDR)
-* 1 x Resistor de 10k Ohms
+* 1 x Sensor de Força HX711
+* 3 x Resistores de 10k Ohms
+* 1 x Resistor de 4.7k Ohms
 * 8 x Jumpercables
 
 ## Requisitos
 
 * Collection FIWARE Postman (FIWARE.postman_collection.json): Recebe e armazena dos dados do ESP32.
 * Biblioteca Paho-MQTT (FIAP_Fiware_Paho.ipynb): Leitura dos dados obtidos pelo ESP32.
-* Código Fonte IDE Arduino (fiware_ngsi_mqtt_esp32.ino): Código principal do circuito, faz todo o processo de captura, leitura de dados e comunicação do microcontrolador com o servidor IoT através de Wi-Fi.
-* Gráfico de Luminosidade (sth-comet.py): Obtém os dados de luminosidade para a criação de um gráfico em função do tempo.
+* Código Fonte IDE Arduino (codigo_sprint4.ino): Código principal do circuito, faz todo o processo de captura, leitura de dados e comunicação do microcontrolador com o servidor IoT através de Wi-Fi.
 * Docker e Docker-Compose Ubuntu Server LTS (docker-compose.yml): Software onde o servidor será instalado (Clique <a href=https://docs.docker.com/engine/install/ubuntu/> aqui </a> para ver as instruções de instalação.
 
 ## Autores
 
-- **Leonardo Mansur**
-- **Luís Guilherme**
+- **Leonardo Mansur - RM:551659**
+- **Luís Guilherme - RM:98688**
+- **Arthur Abreu - RM:98283**
+- **Carlos Roberto - RM:551877**
