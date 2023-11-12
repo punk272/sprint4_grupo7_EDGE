@@ -1,7 +1,7 @@
 <h1 align="center"> Sprint 4 - Sensor de Força + LCD + LED no ESP32 | Challenge IBM </h1> <br>
 <p align="center">
   <a href="https://github.com/punk272/sprint4_grupo7_EDGE">
-    <img alt="Circuito" title="ESP32HX711" src="https://i.imgur.com/oi39wS9.png" width="1000">
+    <img alt="Circuito" title="ESP32HX711" src="https://i.imgur.com/oKQo5ZP.png" width="1000">
   </a>
 </p>
 
