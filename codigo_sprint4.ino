@@ -28,17 +28,22 @@
                                  //            irá fechar a conexão de um deles).
                                  // o valor "n" precisa ser único!
 
-// Force Sensor
-#define DOUT 34
-#define SCK 35
+// Defina os pinos para o sensor de força HX711
+#define DOUT 25
+#define SCK 26
+
+HX711 scale;
 
 // Defina os pinos para os LEDs
-#define LED_VERMELHO 25
-#define LED_AMARELO 26
-#define LED_VERDE 27
+#define LED_VERMELHO 27
+#define LED_AMARELO 14
+#define LED_VERDE 12
 
-// Display LCD
-LiquidCrystal_I2C lcd(0x27,16,2);
+// Configuração do display LCD 16x2 com comunicação I2C
+#define I2C_ADDR 0x27 // Endereço I2C padrão para o módulo
+#define LCD_COLUMNS 16
+#define LCD_ROWS 2
+LiquidCrystal_I2C lcd(I2C_ADDR, LCD_COLUMNS, LCD_ROWS);
 
 // WIFI
 const char* SSID = "FIAP-IBM"; // SSID / nome da rede WI-FI que deseja se conectar
@@ -78,15 +83,20 @@ void setup() {
   MQTT.publish(TOPICO_PUBLISH, "s|off");
   lcd.backlight();
 
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   scale.begin(DOUT, SCK);
-  scale.set_scale(); // Defina a escala conforme as calibrações do seu sensor
+  scale.set_scale(2076.0); // Ajuste este valor conforme as calibrações do seu sensor para 5 kg
   scale.tare();
 
   pinMode(LED_VERMELHO, OUTPUT);
   pinMode(LED_AMARELO, OUTPUT);
   pinMode(LED_VERDE, OUTPUT);
+
+  lcd.begin(LCD_COLUMNS, LCD_ROWS);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Peso: ");
 }
 
 //Função: inicializa comunicação serial com baudrate 115200 (para fins de monitorar no terminal serial 
@@ -242,13 +252,12 @@ void EnviaEstadoOutputMQTT(void)
  
  
 //programa principal
-void loop() 
-{   
+void loop() {
   // Leia o valor do sensor de força e converta para quilogramas
   float weightKg = scale.get_units(10);
 
-  // Calcule a porcentagem de peso em relação ao máximo (150 kg)
-  float weightPercentage = (weightKg / 150.0) * 100.0;
+  // Calcule a porcentagem de peso em relação ao máximo (5 kg)
+  float weightPercentage = (weightKg / 5.0) * 100.0;
     
   char msgBuffer[4];
   //garante funcionamento das conexões WiFi e ao broker MQTT
@@ -257,17 +266,14 @@ void loop()
   //envia o status de todos os outputs para o Broker no protocolo esperado
   EnviaEstadoOutputMQTT();
 
-  // Atualize o display OLED com o valor em quilogramas e a porcentagem
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.print("Peso: ");
-  display.print(weightKg, 2);
-  display.println(" Kg");
-  display.setCursor(0, 16);
-  display.print("Porcentagem: ");
-  display.print(weightPercentage, 2);
-  display.println("%");
-  display.display();
+// Atualize o display LCD com o valor em quilogramas e a porcentagem
+  lcd.setCursor(6, 0);
+  lcd.print(weightKg, 2);
+  lcd.print(" Kg");
+  lcd.setCursor(0, 1);
+  lcd.print("Porcentagem: ");
+  lcd.print(weightPercentage, 2);
+  lcd.print("%");
 
   //Publicação tópico MQTT peso
   dtostrf(peso, 4, 2, msgBuffer);
@@ -296,7 +302,7 @@ void loop()
     digitalWrite(LED_VERMELHO, HIGH);
   }
 
-  delay(1000);
+  delay(1000);  // Atualize a cada segundo ou conforme necessário
  
 
   //keep-alive da comunicação com broker MQTT
