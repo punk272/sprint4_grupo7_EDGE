@@ -1,7 +1,7 @@
 <h1 align="center"> Sprint 4 - Sensor de Força + LCD + LED no ESP32 | Challenge IBM </h1> <br>
 <p align="center">
   <a href="https://github.com/punk272/sprint4_grupo7_EDGE">
-    <img alt="Circuito" title="ESP32HX711" src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2022/03/ESP32-load-cell-HX711-amplifier.jpg?resize=1024%2C576&quality=100&strip=all&ssl=1" width="1000">
+    <img alt="Circuito" title="ESP32HX711" src="https://i.imgur.com/oi39wS9.png" width="1000">
   </a>
 </p>
 
@@ -72,4 +72,3 @@ Peças usadas na construção deste circuito:
 - **Leonardo Mansur - RM:551659**
 - **Luís Guilherme - RM:98688**
 - **Arthur Abreu - RM:98283**
-- **Carlos Roberto - RM:551877**
